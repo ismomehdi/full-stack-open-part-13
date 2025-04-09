@@ -11,34 +11,28 @@ router.get('/', async (req, res) => {
 	res.json(blogs)
 })
 
+// "Starting with Express 5, route handlers and middleware
+// that return a Promise will call next(value) automatically
+// when they reject or throw an error."
+//
+// This means that error handling middleware is not needed here.
+//
+// https://expressjs.com/en/guide/error-handling.html
 router.post('/', async (req, res) => {
-	try {
-		const blog = await Blog.create(req.body)
-		res.json(blog)
-	} catch (error) {
-		return res.status(400).json({ error })
-	}
+	const blog = await Blog.create(req.body)
+	res.json(blog)
 })
 
 router.put('/:id', blogFinder, async (req, res) => {
 	if (!req.blog) res.status(404).end()
-
-	try {
-		req.blog.likes = req.body.likes
-		await req.blog.save()
-		res.json(req.blog)
-	} catch (error) {
-		return res.status(400).json({ error })
-	}
+	req.blog.likes = req.body.likes
+	await req.blog.save()
+	res.json(req.blog)
 })
 
 router.delete('/:id', async (req, res) => {
-	try {
-		await Blog.destroy({ where: { id: req.params.id } })
-		res.status(204).end()
-	} catch (error) {
-		return res.status(400).json({ error })
-	}
+	await Blog.destroy({ where: { id: req.params.id } })
+	res.status(204).end()
 })
 
 module.exports = router

@@ -5,7 +5,7 @@ const { Umzug, SequelizeStorage } = require("umzug");
 const sequelize = new Sequelize(
   DATABASE_URL,
   (options = {
-    logging: false,
+    logging: true,
   })
 );
 

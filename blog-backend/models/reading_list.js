@@ -11,6 +11,11 @@ ReadingList.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: "users", key: "id" },
+    },
     name: {
       type: DataTypes.TEXT,
     },
@@ -20,6 +25,7 @@ ReadingList.init(
     underscored: true,
     timestamps: false,
     modelName: "reading_list",
+    tableName: "reading_list",
   }
 );
 

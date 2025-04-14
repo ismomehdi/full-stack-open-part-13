@@ -27,6 +27,7 @@ ReadingListBook.init(
     underscored: true,
     timestamps: false,
     modelName: "ReadingListBook",
+    tableName: "reading_list_blog",
   }
 );
 

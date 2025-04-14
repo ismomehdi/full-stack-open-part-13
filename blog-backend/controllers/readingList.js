@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Blog, User, ReadingList, ReadingListBook } = require("../models");
+const { Blog, User, ReadingList, ReadingListBlog } = require("../models");
 const jwt = require("jsonwebtoken");
 const { SECRET } = require("../util/config");
 const { Op } = require("sequelize");
@@ -33,14 +33,11 @@ router.post("/", async (req, res) => {
     });
   }
 
-  // add blog to reading list book table
   const readingList = await ReadingList.findOne({
     where: { userId: user_id },
   });
 
-  console.log("blog id", blog_id);
-  console.log("reading list id", readingList);
-  const added = await ReadingListBook.create({
+  const added = await ReadingListBlog.create({
     blogId: blog_id,
     readingListId: readingList.id,
   });

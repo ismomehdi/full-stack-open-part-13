@@ -45,4 +45,24 @@ router.post("/", async (req, res) => {
   res.json(added);
 });
 
+router.put("/:id", tokenExtractor, async (req, res) => {
+  const readingListBlog = await ReadingListBlog.findOne({
+    where: { blog_id: req.params.id },
+  });
+  if (!readingListBlog)
+    return res.status(404).json({ error: "Reading list blog not found" });
+
+  const readingList = await ReadingList.findOne({
+    where: { id: readingListBlog.readingListId },
+  });
+
+  if (readingList.userId !== req.decodedToken.id)
+    return res.status(401).json({ error: "Unauthorized" });
+
+  readingListBlog.read = req.body.read;
+  await readingListBlog.save();
+
+  res.json(readingListBlog);
+});
+
 module.exports = router;

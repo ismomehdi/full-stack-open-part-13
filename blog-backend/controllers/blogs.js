@@ -50,7 +50,11 @@ router.put("/:id", blogFinder, async (req, res) => {
   res.json(req.blog);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", tokenExtractor, async (req, res) => {
+  const blog = await Blog.findByPk(req.params.id);
+  if (!blog) return res.status(404).end();
+  if (blog.userId !== req.decodedToken.id) return res.status(401).json();
+
   await Blog.destroy({ where: { id: req.params.id } });
   res.status(204).end();
 });

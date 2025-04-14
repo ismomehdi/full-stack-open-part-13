@@ -6,8 +6,9 @@ class Session extends Model {}
 Session.init(
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -26,6 +27,8 @@ Session.init(
     sequelize,
     underscored: true,
     modelName: "session",
+    tableName: "sessions",
+    timestamps: false,
   }
 );
 

@@ -4,8 +4,9 @@ module.exports = {
   up: async ({ context: queryInterface }) => {
     await queryInterface.createTable("sessions", {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       user_id: {
         type: DataTypes.INTEGER,

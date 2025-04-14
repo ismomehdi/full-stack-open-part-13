@@ -24,11 +24,11 @@ module.exports = {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      create_at: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      update_at: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
@@ -51,11 +51,11 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      create_at: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      update_at: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
